@@ -4,7 +4,7 @@ MCP server for image generation using Gemini.
 
 ## Features
 
-- **Text-to-image generation** via Gemini (default: `gemini-2.5-flash-image`)
+- **Text-to-image generation** via Gemini (default: `gemini-3-pro-image-preview`)
 - Multiple aspect ratio support (1:1, 16:9, 9:16, etc.)
 - Returns generated images both as files and inline via MCP image content type
 - Supports both **AI Studio** (API key) and **Vertex AI** (service account) backends
@@ -32,7 +32,6 @@ npm run build
 | `GEMINI_API_KEY` | Option 1 | — | AI Studio API key (takes priority over Vertex AI) |
 | `VERTEX_PROJECT` | Option 2 | — | Google Cloud project ID (Vertex AI) |
 | `VERTEX_LOCATION` | No | `us-central1` | Vertex AI location |
-| `GEMINI_MODEL` | No | `gemini-2.5-flash-image` | Model name |
 
 > **Note:** Set either `GEMINI_API_KEY` or `VERTEX_PROJECT`. If both are set, `GEMINI_API_KEY` takes priority.
 
@@ -83,6 +82,7 @@ Generate an image from a text prompt.
 | `prompt` | string | Yes | — | Text prompt for image generation (English recommended) |
 | `aspect_ratio` | enum | No | `"1:1"` | Aspect ratio: `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` |
 | `output_path` | string | Yes | — | File path to save the generated image (.png) |
+| `model` | string | No | `"gemini-3-pro-image-preview"` | Gemini model name (e.g. `gemini-2.5-flash-image`) |
 
 **Returns:** Generated image saved to `output_path`, plus inline image via MCP image content type.
 

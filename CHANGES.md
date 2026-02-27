@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0 (2026-02-27)
+
+- Add `model` parameter to `generate_image` tool for per-request model selection
+  - Default: `gemini-3-pro-image-preview`
+  - Allows using `gemini-3-pro-image-preview` or other models without server restart
+- Remove `GEMINI_MODEL` environment variable (use the `model` parameter instead)
+
 ## 0.3.0 (2026-02-27)
 
 - Add AI Studio (API key) backend support via `GEMINI_API_KEY`

@@ -32,6 +32,14 @@ const inputSchema = {
       "File path to save the generated image (.png). " +
         "Example: C:/Users/palan/Pictures/output.png",
     ),
+  model: z
+    .string()
+    .optional()
+    .describe(
+      "Gemini model name for image generation. " +
+        "Default: gemini-3-pro-image-preview. " +
+        "Example: gemini-2.5-flash-image",
+    ),
 };
 
 export function registerGenerateImageTool(server: McpServer): void {
@@ -45,12 +53,12 @@ export function registerGenerateImageTool(server: McpServer): void {
         "Supports various aspect ratios.",
       inputSchema,
     },
-    async ({ prompt, aspect_ratio, output_path }) => {
+    async ({ prompt, aspect_ratio, output_path, model }) => {
       try {
         const dir = path.dirname(output_path);
         await fs.mkdir(dir, { recursive: true });
 
-        const result = await generateImage(prompt, aspect_ratio);
+        const result = await generateImage(prompt, aspect_ratio, model);
 
         const buffer = Buffer.from(result.imageBase64, "base64");
         await fs.writeFile(output_path, buffer);

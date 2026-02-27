@@ -1,13 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 
-interface GeminiConfig {
-  model: string;
-  backend: string;
-}
-
-function getModel(): string {
-  return process.env.GEMINI_MODEL ?? "gemini-2.5-flash-image";
-}
+const DEFAULT_MODEL = "gemini-3-pro-image-preview";
 
 let client: GoogleGenAI | null = null;
 
@@ -39,12 +32,13 @@ export interface GenerateImageResult {
 export async function generateImage(
   prompt: string,
   aspectRatio: string,
+  model?: string,
 ): Promise<GenerateImageResult> {
-  const model = getModel();
+  const resolvedModel = model ?? DEFAULT_MODEL;
   const ai = getClient();
 
   const response = await ai.models.generateContent({
-    model,
+    model: resolvedModel,
     contents: prompt,
     config: {
       responseModalities: ["TEXT", "IMAGE"],
