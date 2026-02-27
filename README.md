@@ -4,7 +4,7 @@ MCP server for image generation using Gemini on Vertex AI.
 
 ## Features
 
-- **Text-to-image generation** via Gemini (`gemini-3-pro-image-preview`)
+- **Text-to-image generation** via Gemini (`gemini-2.5-flash-image`)
 - Multiple aspect ratio support (1:1, 16:9, 9:16, etc.)
 - Returns generated images both as files and inline via MCP image content type
 
@@ -32,7 +32,7 @@ npm run build
 |---|---|---|---|
 | `VERTEX_PROJECT` | Yes | — | Google Cloud project ID |
 | `VERTEX_LOCATION` | No | `us-central1` | Vertex AI location |
-| `GEMINI_MODEL` | No | `gemini-3-pro-image-preview` | Model name |
+| `GEMINI_MODEL` | No | `gemini-2.5-flash-image` | Model name |
 
 ### Claude Code MCP Registration
 

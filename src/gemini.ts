@@ -17,7 +17,7 @@ function getConfig(): GeminiConfig {
   return {
     project,
     location: process.env.VERTEX_LOCATION ?? "us-central1",
-    model: process.env.GEMINI_MODEL ?? "gemini-3-pro-image-preview",
+    model: process.env.GEMINI_MODEL ?? "gemini-2.5-flash-image",
   };
 }
 
