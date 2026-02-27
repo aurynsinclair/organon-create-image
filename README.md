@@ -1,21 +1,20 @@
 # organon-create-image
 
-MCP server for image generation using Gemini on Vertex AI.
+MCP server for image generation using Gemini.
 
 ## Features
 
-- **Text-to-image generation** via Gemini (`gemini-2.5-flash-image`)
+- **Text-to-image generation** via Gemini (default: `gemini-2.5-flash-image`)
 - Multiple aspect ratio support (1:1, 16:9, 9:16, etc.)
 - Returns generated images both as files and inline via MCP image content type
+- Supports both **AI Studio** (API key) and **Vertex AI** (service account) backends
 
 ## Prerequisites
 
 - Node.js 18+
-- Google Cloud project with Vertex AI API enabled
-- Application Default Credentials configured:
-  ```bash
-  gcloud auth application-default login
-  ```
+- One of the following:
+  - **AI Studio**: A Gemini API key from [Google AI Studio](https://aistudio.google.com/)
+  - **Vertex AI**: A Google Cloud project with Vertex AI API enabled + Application Default Credentials
 
 ## Setup
 
@@ -30,23 +29,41 @@ npm run build
 
 | Variable | Required | Default | Description |
 |---|---|---|---|
-| `VERTEX_PROJECT` | Yes | — | Google Cloud project ID |
+| `GEMINI_API_KEY` | Option 1 | — | AI Studio API key (takes priority over Vertex AI) |
+| `VERTEX_PROJECT` | Option 2 | — | Google Cloud project ID (Vertex AI) |
 | `VERTEX_LOCATION` | No | `us-central1` | Vertex AI location |
 | `GEMINI_MODEL` | No | `gemini-2.5-flash-image` | Model name |
 
+> **Note:** Set either `GEMINI_API_KEY` or `VERTEX_PROJECT`. If both are set, `GEMINI_API_KEY` takes priority.
+
 ### Claude Code MCP Registration
 
-Add to your Claude Code `settings.json`:
+**AI Studio** (recommended for access to preview models):
 
 ```json
 {
   "mcpServers": {
-    "organon-create-image": {
+    "create-image": {
       "command": "node",
       "args": ["/path/to/organon-create-image/dist/index.js"],
       "env": {
-        "VERTEX_PROJECT": "your-gcp-project-id",
-        "VERTEX_LOCATION": "us-central1"
+        "GEMINI_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+**Vertex AI:**
+
+```json
+{
+  "mcpServers": {
+    "create-image": {
+      "command": "node",
+      "args": ["/path/to/organon-create-image/dist/index.js"],
+      "env": {
+        "VERTEX_PROJECT": "your-gcp-project-id"
       }
     }
   }

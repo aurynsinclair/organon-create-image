@@ -1,36 +1,31 @@
 import { GoogleGenAI } from "@google/genai";
 
 interface GeminiConfig {
-  project: string;
-  location: string;
   model: string;
+  backend: string;
 }
 
-function getConfig(): GeminiConfig {
-  const project = process.env.VERTEX_PROJECT;
-  if (!project) {
-    throw new Error(
-      "VERTEX_PROJECT environment variable is required. " +
-        "Set it to your Google Cloud project ID.",
-    );
-  }
-  return {
-    project,
-    location: process.env.VERTEX_LOCATION ?? "us-central1",
-    model: process.env.GEMINI_MODEL ?? "gemini-2.5-flash-image",
-  };
+function getModel(): string {
+  return process.env.GEMINI_MODEL ?? "gemini-2.5-flash-image";
 }
 
 let client: GoogleGenAI | null = null;
 
 function getClient(): GoogleGenAI {
   if (!client) {
-    const config = getConfig();
-    client = new GoogleGenAI({
-      vertexai: true,
-      project: config.project,
-      location: config.location,
-    });
+    const apiKey = process.env.GEMINI_API_KEY;
+    const project = process.env.VERTEX_PROJECT;
+
+    if (apiKey) {
+      client = new GoogleGenAI({ apiKey });
+    } else if (project) {
+      const location = process.env.VERTEX_LOCATION ?? "us-central1";
+      client = new GoogleGenAI({ vertexai: true, project, location });
+    } else {
+      throw new Error(
+        "Either GEMINI_API_KEY (AI Studio) or VERTEX_PROJECT (Vertex AI) is required.",
+      );
+    }
   }
   return client;
 }
@@ -45,11 +40,11 @@ export async function generateImage(
   prompt: string,
   aspectRatio: string,
 ): Promise<GenerateImageResult> {
-  const config = getConfig();
+  const model = getModel();
   const ai = getClient();
 
   const response = await ai.models.generateContent({
-    model: config.model,
+    model,
     contents: prompt,
     config: {
       responseModalities: ["TEXT", "IMAGE"],
