@@ -83,11 +83,13 @@ export function registerGenerateImageTool(server: McpServer): void {
           ],
         };
       } catch (error) {
-        const message =
-          error instanceof Error ? error.message : String(error);
+        const message = error instanceof Error ? error.message : String(error);
         return {
           content: [
-            { type: "text" as const, text: `Image generation failed: ${message}` },
+            {
+              type: "text" as const,
+              text: `Image generation failed: ${message}`,
+            },
           ],
           isError: true,
         };

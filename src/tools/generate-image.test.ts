@@ -59,13 +59,22 @@ describe("generate-image tool", () => {
       output_path: "/tmp/test.png",
     })) as { content: Array<Record<string, string>> };
 
-    expect(generateImage).toHaveBeenCalledWith("a red circle", "1:1", undefined);
+    expect(generateImage).toHaveBeenCalledWith(
+      "a red circle",
+      "1:1",
+      undefined,
+    );
     expect(fs.mkdir).toHaveBeenCalled();
-    expect(fs.writeFile).toHaveBeenCalledWith("/tmp/test.png", expect.any(Buffer));
+    expect(fs.writeFile).toHaveBeenCalledWith(
+      "/tmp/test.png",
+      expect.any(Buffer),
+    );
     expect(result.content).toHaveLength(2);
     expect(result.content[0]).toEqual({
       type: "text",
-      text: expect.stringContaining("Image generated and saved to: /tmp/test.png"),
+      text: expect.stringContaining(
+        "Image generated and saved to: /tmp/test.png",
+      ),
     });
     expect(result.content[1]).toEqual({
       type: "image",

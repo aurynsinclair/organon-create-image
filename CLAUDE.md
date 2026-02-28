@@ -28,11 +28,11 @@
 
 初回セッション時は `Nexus/README.md` と `Nexus/profile/about.md` を読んで全体像を把握すること。
 
-| パス | 内容 | 用途 |
-|---|---|---|
-| `profile/about.md` | 柳澤さんの永続プロフィール | 参照（編集しない） |
-| `log/YYYY-MM-DD-viola-organon-create-image.md` | セッション日誌 | `/end` 時に追記 |
-| `messages/inbox.md` | AI伝言板 | `/start` 時にチェック |
+| パス                                           | 内容                       | 用途                  |
+| ---------------------------------------------- | -------------------------- | --------------------- |
+| `profile/about.md`                             | 柳澤さんの永続プロフィール | 参照（編集しない）    |
+| `log/YYYY-MM-DD-viola-organon-create-image.md` | セッション日誌             | `/end` 時に追記       |
+| `messages/inbox.md`                            | AI伝言板                   | `/start` 時にチェック |
 
 ### Nexus 運用ルール
 

@@ -27,11 +27,11 @@ npm run build
 
 ### Environment Variables
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `GEMINI_API_KEY` | Option 1 | — | AI Studio API key (takes priority over Vertex AI) |
-| `VERTEX_PROJECT` | Option 2 | — | Google Cloud project ID (Vertex AI) |
-| `VERTEX_LOCATION` | No | `us-central1` | Vertex AI location |
+| Variable          | Required | Default       | Description                                       |
+| ----------------- | -------- | ------------- | ------------------------------------------------- |
+| `GEMINI_API_KEY`  | Option 1 | —             | AI Studio API key (takes priority over Vertex AI) |
+| `VERTEX_PROJECT`  | Option 2 | —             | Google Cloud project ID (Vertex AI)               |
+| `VERTEX_LOCATION` | No       | `us-central1` | Vertex AI location                                |
 
 > **Note:** Set either `GEMINI_API_KEY` or `VERTEX_PROJECT`. If both are set, `GEMINI_API_KEY` takes priority.
 
@@ -77,12 +77,12 @@ Generate an image from a text prompt.
 
 **Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|---|---|---|---|---|
-| `prompt` | string | Yes | — | Text prompt for image generation (English recommended) |
-| `aspect_ratio` | enum | No | `"1:1"` | Aspect ratio: `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` |
-| `output_path` | string | Yes | — | File path to save the generated image (.png) |
-| `model` | string | No | `"gemini-3-pro-image-preview"` | Gemini model name (e.g. `gemini-2.5-flash-image`) |
+| Parameter      | Type   | Required | Default                        | Description                                                                           |
+| -------------- | ------ | -------- | ------------------------------ | ------------------------------------------------------------------------------------- |
+| `prompt`       | string | Yes      | —                              | Text prompt for image generation (English recommended)                                |
+| `aspect_ratio` | enum   | No       | `"1:1"`                        | Aspect ratio: `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` |
+| `output_path`  | string | Yes      | —                              | File path to save the generated image (.png)                                          |
+| `model`        | string | No       | `"gemini-3-pro-image-preview"` | Gemini model name (e.g. `gemini-2.5-flash-image`)                                     |
 
 **Returns:** Generated image saved to `output_path`, plus inline image via MCP image content type.
 

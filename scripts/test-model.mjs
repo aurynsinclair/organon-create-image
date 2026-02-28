@@ -22,7 +22,8 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const model = process.argv[2] || process.env.GEMINI_MODEL || "gemini-2.5-flash-image";
+const model =
+  process.argv[2] || process.env.GEMINI_MODEL || "gemini-2.5-flash-image";
 const apiKey = process.env.GEMINI_API_KEY;
 const project = process.env.VERTEX_PROJECT;
 const location = process.env.VERTEX_LOCATION || "us-central1";
@@ -37,7 +38,9 @@ if (apiKey) {
   ai = new GoogleGenAI({ vertexai: true, project, location });
   backend = `Vertex AI (${project} / ${location})`;
 } else {
-  console.error("ERROR: Set GEMINI_API_KEY (AI Studio) or VERTEX_PROJECT (Vertex AI).");
+  console.error(
+    "ERROR: Set GEMINI_API_KEY (AI Studio) or VERTEX_PROJECT (Vertex AI).",
+  );
   process.exit(1);
 }
 
@@ -75,7 +78,9 @@ try {
   }
 
   console.log(`SUCCESS (${elapsed}s)`);
-  console.log(`  Image: ${hasImage ? `yes (${(imageBytes * 0.75 / 1024).toFixed(0)} KB base64-decoded)` : "no"}`);
+  console.log(
+    `  Image: ${hasImage ? `yes (${((imageBytes * 0.75) / 1024).toFixed(0)} KB base64-decoded)` : "no"}`,
+  );
   if (text) console.log(`  Text:  ${text}`);
 } catch (err) {
   const msg = err instanceof Error ? err.message : String(err);
