@@ -75,3 +75,7 @@ export async function generateImage(
 
   return { imageBase64, mimeType, text };
 }
+
+export function _resetClientForTesting(): void {
+  client = null;
+}
