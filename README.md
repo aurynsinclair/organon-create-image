@@ -86,6 +86,28 @@ Generate an image from a text prompt.
 
 **Returns:** Generated image saved to `output_path`, plus inline image via MCP image content type.
 
+## Quality Checks
+
+Run all quality checks at once:
+
+```bash
+npm run check:all
+```
+
+This executes the following checks in sequence:
+
+| Script           | Check                          | Tool                       |
+| ---------------- | ------------------------------ | -------------------------- |
+| `typecheck`      | Type checking (strict)         | tsc --noEmit               |
+| `lint`           | Linter + cyclomatic complexity | ESLint + typescript-eslint |
+| `format:check`   | Code formatting                | Prettier                   |
+| `test:coverage`  | Tests + coverage report        | Vitest + V8                |
+| `audit`          | Known CVE scan                 | npm audit                  |
+| `audit:lockfile` | Lockfile integrity             | lockfile-lint              |
+| `sast`           | Security static analysis       | Semgrep                    |
+
+> **Note:** Semgrep requires a separate installation via `pip`. See [QUALITY.md](QUALITY.md) for setup details.
+
 ## License
 
 MIT
