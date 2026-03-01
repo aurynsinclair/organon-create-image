@@ -16,7 +16,8 @@
     "typecheck": "tsc --noEmit",
     "audit": "npm audit",
     "audit:lockfile": "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm --validate-https --validate-integrity",
-    "sast": "cross-env PYTHONUTF8=1 semgrep scan --config auto --error --quiet src/"
+    "sast": "cross-env PYTHONUTF8=1 semgrep scan --config auto --error --quiet src/",
+    "check:all": "npm run typecheck && npm run lint && npm run format:check && npm run test:coverage && npm run audit && npm run audit:lockfile && npm run sast"
   },
   "dependencies": {
     "@google/genai": "^1.43.0",
@@ -27,7 +28,7 @@
     "@types/node": "^22.0.0",
     "@vitest/coverage-v8": "^4.0.18",
     "cross-env": "^10.1.0",
-    "eslint": "^10.0.2",
+    "eslint": "^9.39.3",
     "eslint-config-prettier": "^10.1.8",
     "lockfile-lint": "^5.0.0",
     "prettier": "^3.8.1",
